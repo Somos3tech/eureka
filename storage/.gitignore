@@ -1,0 +1,12 @@
+*
+!logs/
+!framework/
+!app/
+!.gitignore
+!Carga Masiva Entrada.xlsx
+!customers/
+!documents/
+!domiciliacion/
+!afiliacion/
+!preafiliations/
+!temporal/

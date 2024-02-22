@@ -1,0 +1,26 @@
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+composer.lock
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+storage/*.key
+# /storage
+.env
+.phpunit.result.cache
+micromatch
+Homestead.yaml
+Homestead.json
+/.vagrant
+npm-debug.log
+yarn-error.log
+
+#Resilio
+/.sync

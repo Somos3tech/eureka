@@ -1,0 +1,6 @@
+{
+    "name": "Usuarios",
+    "slug": "users",
+    "version": "1.0",
+    "description": "Módulo de COnfiguración: Usuarios, Permisos, Perfiles"
+}
