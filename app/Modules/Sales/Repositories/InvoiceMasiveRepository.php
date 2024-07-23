@@ -1522,7 +1522,8 @@ class InvoiceMasiveRepository implements InvoiceMasiveInterface
             $cont++;
         }
 
-        $document = '/domiciliacion/0171/bank/' . 'Cobranza ' . date('d-m-Y') . '.txt';
+        $date_operation = $request['date_operation'] != '' ? $request['date_operation'] : now();
+        $document = '/domiciliacion/0171/bank/' . 'F03_20013_' . date_format(Carbon::parse($date_operation), 'dmY') . '.txt';
         $file = fopen(storage_path() . $document, 'w'); // Abrir archivo
 
         foreach ($data as $key => $final) {

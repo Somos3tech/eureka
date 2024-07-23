@@ -1,6 +1,8 @@
 @extends('layouts.compact-master')
 
 @section('page-css')
+    <link rel="stylesheet" href="{{ asset('/assets/styles/vendor/datatables.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('/assets/styles/vendor/sweetalert2.min.css') }}">
     <link href="/assets/css/select2.min.css" rel="stylesheet" />
     <!-- Plugins css -->
@@ -250,13 +252,14 @@
                                                         </h5>
                                                     </center>
                                                 </div>
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-12" style="display:none;">
                                                     <hr>
                                                     <table id="statements-detail" name="statements-detail"
                                                         class="table table-striped table-bordered table-responsive statement"
                                                         cellspacing="0" width="100%">
                                                         <thead>
                                                             <tr>
+                                                                <!--
                                                                 <th>
                                                                     <center>No. Cobro</center>
                                                                 </th>
@@ -278,9 +281,44 @@
                                                                 <th>
                                                                     <center>Monto Bs.</center>
                                                                 </th>
+                                                            -->
                                                             </tr>
                                                         </thead>
                                                     </table>
+                                                </div>
+                                                <!-- ////////////////////////////////////////////////////// -->
+                                                                                                <div class="col-sm-12">
+                                                    <hr>
+                    <div id="mterminals" style="display:block;" class="box-body table-responsive">
+                        <table id="statements-detail_test" class="table table-striped table-bordered" cellspacing="0"
+                            width="100%">
+                            <thead>
+                                <tr>
+                                                                <th>
+                                                                    <center>No. Cobro</center>
+                                                                </th>
+                                                                <th>
+                                                                    <center>No. Pago</center>
+                                                                </th>
+                                                                <th>
+                                                                    <center>Fecha Operación</center>
+                                                                </th>
+                                                                <th>
+                                                                    <center>Tipo Operación</center>
+                                                                </th>
+                                                                <th>
+                                                                    <center>Monto $</center>
+                                                                </th>
+                                                                <th>
+                                                                    <center>Tarifa Cambio</center>
+                                                                </th>
+                                                                <th>
+                                                                    <center>Monto Bs.</center>
+                                                                </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -578,6 +616,7 @@
 @endsection
 
 @section('page-js')
+<script src="{{ asset('/assets/js/vendor/datatables.min.js') }}"></script>
     <script src="{{ asset('/assets/js/vendor/sweetalert2.min.js') }}"></script>
     <script src="/assets/js/select2.min.js"></script>
 
@@ -735,6 +774,60 @@
                         tblBody.appendChild(fila);
                         tbl.appendChild(tblBody);
                         tbl.setAttribute("border", "2");
+
+/****************************************************************/
+/****************************************************************/
+/****************************************************************/
+
+        $(document).ready(function() {
+            $('#mterminals').show();
+            listmterminals();
+        });
+        var listmterminals = function() {
+            table = $('#statements-detail_test').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                ajax: '/statements/getHistorialManagementTest?contract_id=' + contract_id,
+                columns: [{
+                        data: "id",
+                    },
+                    {
+                        data: "collection_id",
+                        "className": "text-center"
+                    },
+                    {
+                        data: "date",
+                        "className": "text-center"
+                    },
+                    {
+                        data: "type",
+                        "className": "text-center"
+                    },
+                    {
+                        data: "amount",
+                        "className": "text-center"
+                    },
+                    {
+                        data: "dicom",
+                        "className": "text-center"
+                    },
+                    {
+                        data: "amount_currency",
+                        "className": "text-center"
+                    },
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                dom: 'Bfrtip',
+                buttons: []
+            });
+        }
+
+
+                        /****************************************************************/
+                        /****************************************************************/
                         /****************************************************************/
                         $.get('/statements/getHistorialManagement?contract_id=' + contract_id, function(data) {
                             if (data.length > 0) {
@@ -760,7 +853,7 @@
                                         collection = parseFloat(collection) + parseFloat(
                                             subStatementObj.amount);
                                     }
-
+/*
                                     var fila = document.createElement("tr");
 
                                     var celda = document.createElement("td");
@@ -809,6 +902,7 @@
                                     tblBody.appendChild(fila);
                                     tbl.appendChild(tblBody);
                                     tbl.setAttribute("border", "2");
+                                    */
                                 });
 
                                 var total = (parseFloat(invoice) - parseFloat(collection));

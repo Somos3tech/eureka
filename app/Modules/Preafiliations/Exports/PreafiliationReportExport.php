@@ -58,7 +58,7 @@ class PreafiliationReportExport implements FromCollection, ShouldAutoSize, WithH
         if ($request->has('date_range')) {
             $date = explode('|', $request['date_range']);
             if (count($date) > 1) {
-                $query->whereBetween('preafiliations.created_at', [$date[0].'%', $date[1].'%']);
+                $query->whereBetween('preafiliations.created_at', [$date[0] . '%', $date[1] . '%']);
             }
         }
 
@@ -71,14 +71,14 @@ class PreafiliationReportExport implements FromCollection, ShouldAutoSize, WithH
                 }
 
                 if ($i == 0) {
-                    $query->where('preafiliations.'.$request['field'][$i], $operator, $request['query'][$i]);
+                    $query->where('preafiliations.' . $request['field'][$i], $operator, $request['query'][$i]);
                     $cond = $request['conditional'][$i];
                 } else {
                     if ($cond == 'AND' || $cond == '') {
-                        $query->where('preafiliations.'.$request['field'][$i], $operator, $request['query'][$i]);
+                        $query->where('preafiliations.' . $request['field'][$i], $operator, $request['query'][$i]);
                         $cond = $request['conditional'][$i];
                     } else {
-                        $query->OrWhere('preafiliations.'.$request['field'][$i], $operator, $request['query'][$i]);
+                        $query->OrWhere('preafiliations.' . $request['field'][$i], $operator, $request['query'][$i]);
                         $cond = $request['conditional'][$i];
                     }
                 }
@@ -234,13 +234,18 @@ class PreafiliationReportExport implements FromCollection, ShouldAutoSize, WithH
             $data_bank = unserialize($row['data_bank']);
             $bank = Bank::query()->select('description')->where('id', $data_bank['bank_id'])->first();
             $data[$key]['bank'] = $bank->description;
-            $data[$key]['account_number'] = $data_bank['bank_code'].$data_bank['account_bank'];
+            $data[$key]['account_number'] = $data_bank['bank_code'] . $data_bank['account_bank'];
             $data[$key]['affiliate_number'] = $data_bank['affiliate_number'];
 
             $data_contract = unserialize($row['data_contract']);
 
             $company = Company::query()->select('description')->where('id', $customer['company_id'])->first();
+            //if (!empty($company->description)) {
             $data[$key]['company'] = $company->description;
+            //} else {
+            //    $data[$key]['company'] = "";
+            //}
+
             $modelterminal = Mterminal::query()->select('description')->where('id', $data_contract['modelterminal_id'])->first();
             $data[$key]['modelterminal'] = $modelterminal->description;
 
@@ -266,7 +271,7 @@ class PreafiliationReportExport implements FromCollection, ShouldAutoSize, WithH
             $data[$key]['change_currency'] = $payment['dicom'] != 1 || $payment['dicom'] == null ? $payment['dicom'] : '---';
             $data[$key]['amount'] = $payment['amount'];
             $data[$key]['amount_currency'] = $payment['currency_id'] > 1 ? ($payment['dicom'] * $payment['amount']) : $payment['amount'];
-            $data[$key]['refere'] = ' '.$payment['refere'];
+            $data[$key]['refere'] = ' ' . $payment['refere'];
             $data[$key]['document_payment'] = $row['document_payment'] ? 'Si' : 'No';
 
             $data[$key]['observation_initial'] = $row['observation_initial'] != null ? $row['observation_initial'] : '----';
@@ -367,7 +372,7 @@ class PreafiliationReportExport implements FromCollection, ShouldAutoSize, WithH
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
-                $cellRange = 'A1:BE'.$this->cont; // All headers
+                $cellRange = 'A1:BE' . $this->cont; // All headers
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(9);
 
                 $styleArray = [
@@ -381,16 +386,16 @@ class PreafiliationReportExport implements FromCollection, ShouldAutoSize, WithH
                 $event->sheet->getDelegate()->getStyle('A1:BF1')->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_WHITE);
                 $event->sheet->getDelegate()->getStyle('A1:BF1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('1c235a');
 
-                $event->sheet->getDelegate()->getStyle('A1:BF'.$this->cont)->applyFromArray($styleArray);
+                $event->sheet->getDelegate()->getStyle('A1:BF' . $this->cont)->applyFromArray($styleArray);
                 $event->sheet->getDelegate()->getStyle('A1:BF1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getDelegate()->getStyle('A2:B'.$this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getDelegate()->getStyle('F2:J'.$this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getDelegate()->getStyle('M2:O'.$this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getDelegate()->getStyle('R2:U'.$this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getDelegate()->getStyle('W2:W'.$this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getDelegate()->getStyle('Y2:AM'.$this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getDelegate()->getStyle('AO2:AO'.$this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getDelegate()->getStyle('AS2:BF'.$this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getStyle('A2:B' . $this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getStyle('F2:J' . $this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getStyle('M2:O' . $this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getStyle('R2:U' . $this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getStyle('W2:W' . $this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getStyle('Y2:AM' . $this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getStyle('AO2:AO' . $this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getStyle('AS2:BF' . $this->cont)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
             },
         ];
     }

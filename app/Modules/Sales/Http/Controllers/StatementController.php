@@ -86,6 +86,12 @@ class StatementController extends Controller
     }
 
     /****************************************************************************/
+    public function getHistorialManagementTest(Request $request)
+    {
+        return $this->model->getHistorialManagementTest($request);
+    }
+
+    /****************************************************************************/
     public function getHistorialDomiciliationOperation(Request $request)
     {
         return $this->model->getHistorialDomiciliationOperation($request);

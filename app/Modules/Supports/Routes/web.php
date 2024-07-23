@@ -14,21 +14,30 @@ ini_set('memory_limit', '512M');
 /****************************Soporte Administrativo****************************/
 Route::name('csupports.')->middleware(['auth'])->prefix('csupports')->group(function () {
     //Listado de Marca
-    Route::get('/', ['uses' => 'CsupportController@index', 'as' => 'index'])->middleware('permission:csupport.index');
+    Route::get('/', ['uses' => 'CsupportController@index', 'as' => 'index']);
+    //Route::get('/', ['uses' => 'CsupportController@index', 'as' => 'index'])->middleware('permission:csupport.index');
+
     //Registrar
     Route::get('create', ['uses' => 'CsupportController@create', 'as' => 'create'])->middleware('permission:csupport.create');
 
+    Route::post('storetow', ['uses' => 'CsupportController@store', 'as' => 'storetow']);
     Route::post('store', ['uses' => 'CsupportController@store', 'as' => 'store'])->middleware('permission:csupport.create');
+
     //Formulario Actualizar Marca
-    Route::get('{id}/edit', ['uses' => 'CsupportController@edit', 'as' => 'edit'])->middleware('permission:csupport.edit');
+    Route::get('{id}/edit', ['uses' => 'CsupportController@edit', 'as' => 'edit']);
+    //Route::get('{id}/edit', ['uses' => 'CsupportController@edit', 'as' => 'edit'])->middleware('permission:csupport.edit');
     //Actualizar
-    Route::put('{id}', ['uses' => 'CsupportController@update', 'as' => 'update'])->middleware('permission:csupport.edit');
+    Route::put('{id}', ['uses' => 'CsupportController@update', 'as' => 'update']);
+    //Route::put('{id}', ['uses' => 'CsupportController@update', 'as' => 'update'])->middleware('permission:csupport.edit');
     //Eliminar con Sofdeleted
-    Route::delete('{id}', ['uses' => 'CsupportController@destroy', 'as' => 'destroy'])->middleware('permission:csupport.destroy');
+    Route::delete('{id}', ['uses' => 'CsupportController@destroy', 'as' => 'destroy']);
+    //Route::delete('{id}', ['uses' => 'CsupportController@destroy', 'as' => 'destroy'])->middleware('permission:csupport.destroy');
     //Datatable
-    Route::get('datatable', ['uses' => 'CsupportController@datatable', 'as' => 'datatable'])->middleware('permission:csupport.index');
+    Route::get('datatable', ['uses' => 'CsupportController@datatable', 'as' => 'datatable']);
+    //Route::get('datatable', ['uses' => 'CsupportController@datatable', 'as' => 'datatable'])->middleware('permission:csupport.index');
     //Ver Información Cobro
-    Route::get('{id}', ['uses' => 'CsupportController@show', 'as' => 'show'])->middleware('permission:csupport.index');
+    Route::get('{id}', ['uses' => 'CsupportController@show', 'as' => 'show']);
+    //Route::get('{id}', ['uses' => 'CsupportController@show', 'as' => 'show'])->middleware('permission:csupport.index');
 });
 /******************************************************************************/
 Route::name('serviceSupport.')->middleware(['auth'])->prefix('serviceSupport')->group(function () {

@@ -347,7 +347,7 @@
                             <div class="row">
                                 <div class="col-sm-12 row">
                                     <div class="col-sm-12">
-                                        <h5 class="header-title"><b>Observaciones</b></h5>
+                                        <h5 class="header-title"><b>Observaciones.</b></h5>
                                     </div>
                                     <div class="col-sm-12">
                                         <span id="observation_initial_view" name="observation_initial_view"

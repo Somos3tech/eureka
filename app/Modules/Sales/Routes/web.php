@@ -230,7 +230,8 @@ Route::name('statements.')->middleware(['auth'])->prefix('statements')->group(fu
 
     Route::get('getInformationCustomer', ['uses' => 'StatementController@getInformationCustomer', 'as' => 'information.customer'])->middleware('permission:statements.index');
 
-    Route::get('getHistorialManagement', ['uses' => 'StatementController@getHistorialManagement', 'as' => 'historial.management'])->middleware('permission:statements.index');
+    Route::get('getHistorialManagement', ['uses' => 'StatementController@getHistorialManagement', 'as' => 'historial.management'])->middleware();
+    Route::get('getHistorialManagementTest', ['uses' => 'StatementController@getHistorialManagementTest', 'as' => 'historial.management'])->middleware();
 
     Route::get('getHistorialDomiciliationOperation', ['uses' => 'StatementController@getHistorialDomiciliationOperation', 'as' => 'domiciliation.operation'])->middleware('permission:statements.index');
 

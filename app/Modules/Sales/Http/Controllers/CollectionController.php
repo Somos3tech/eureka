@@ -59,7 +59,7 @@ class CollectionController extends Controller
             curl_close($ch);
             /////////////////////////////////////////////////////////////
 
-            $this->csupport->validAffiliate($result->all());
+            //$this->csupport->validAffiliate($result->all());
             toastr()->info('Pago del Cobro Conciliado Correctamente');
             return redirect()->to('invoices/' . $request->route);
         }

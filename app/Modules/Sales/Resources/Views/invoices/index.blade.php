@@ -370,7 +370,7 @@
                 "observation": observation,
                 "type_support": type_support
             };
-            var route = "{{ route('csupports.store') }}";
+            var route = "{{ route('csupports.storetow') }}";
             var token = $("#token").val();
 
             $.ajax({

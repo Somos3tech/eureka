@@ -525,6 +525,7 @@
                     $("#term_view").append(subPreafiliationObj.term);
                     $("#pmethod_view").append(subPreafiliationObj.pmethod);
                     $("#currency_view").append(subPreafiliationObj.currency);
+                    $("#observation_initial_view").append(subPreafiliationObj.observation_initial);
 
                     $("#amount_view").append(subPreafiliationObj.amount);
                     $("#amount_exchange_view").append(subPreafiliationObj.amount_exchange);

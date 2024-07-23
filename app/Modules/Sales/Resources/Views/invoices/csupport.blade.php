@@ -2,7 +2,8 @@
     aria-labelledby="changeSupportLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form id="form" name="form-csupport"><input name="_token" type="hidden" value="{{ csrf_token() }}"
+            <form id="form" name="form-csupport">
+                <input name="_token" type="hidden" value="{{ csrf_token() }}"
                     id="token">
                 <div class="modal-header">
                     <h5 class="modal-title mt-0" id="changeSupportLabel"><b>Solicitud Soporte Administrativo</b></h5>
@@ -43,6 +44,7 @@
                         <a href="#" $title="Soporte" id="csupport" name="csupport"
                             class="btn bt-sm btn-info waves-effect waves-light">Registrar Solicitud</a>
                     </div>
+
                 </div>
         </div>
         </form>

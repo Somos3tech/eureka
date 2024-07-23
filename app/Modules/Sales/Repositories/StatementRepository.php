@@ -442,6 +442,50 @@ class StatementRepository implements StatementInterface
         return $data;
     }
 
+    /***********************TEST*************************/
+    public function getHistorialManagementTest($request)
+    {
+        $data = [];
+        $invoice = $this->invoice->model->select(
+            \DB::raw("(CASE WHEN (invoices.status='E') THEN 'Exonerado' ELSE CONCAT('----') END) AS collection_id"),
+            \DB::raw("LPAD(invoices.id,8,'0') AS id"),
+            \DB::raw("(CASE WHEN (invoices.status='E') THEN CONCAT('E') ELSE CONCAT('C') END) AS type_abrev"),
+            \DB::raw("DATE_FORMAT(invoices.fechpro, '%d-%m-%Y') as date"),
+            \DB::raw("CONCAT('Cobro Servicios Vepagos') AS type"),
+            'invoices.refere',
+            'invoices.amount',
+            \DB::raw("(CASE WHEN(collections.id IS NOT NULL) THEN collections.dicom ELSE '----' END) AS dicom"),
+            \DB::raw("(CASE WHEN(collections.id IS NOT NULL) THEN collections.amount_currency ELSE '----' END) AS amount_currency")
+        )
+            ->leftjoin('collections', 'collections.invoice_id', '=', 'invoices.id')
+            ->where('invoices.contract_id', (int) $request['contract_id'])
+            ->where('invoices.concept_id', 2)
+            ->whereIn('invoices.status', ['G', 'P', 'C', 'R', 'E', 'N'])
+            ->whereNull('collections.deleted_at')
+            ->get();
+
+        if (isset($invoice)) {
+            $data = array_merge($data, $invoice->toArray());
+        }
+
+        $collection = $this->collection->model->select('invoices.id as id', \DB::raw("CONCAT('P') AS type_abrev"), \DB::raw("LPAD(collections.id,6,'0') AS collection_id"), \DB::raw("DATE_FORMAT(collections.fechpro, '%d-%m-%Y') as date"), \DB::raw("CONCAT('Pago - Cargo Cuenta Cliente - No. Cobro: ',LPAD(invoices.id,8,'0')) AS type"), 'collections.refere', 'collections.amount', 'collections.dicom', 'collections.amount_currency')
+            ->join('invoices', 'invoices.id', '=', 'collections.invoice_id')->where('invoices.contract_id', (int) $request['contract_id'])->where('invoices.concept_id', 2)->whereNull('collections.deleted_at')->get();
+        if (isset($invoice)) {
+            $data = array_merge($data, $collection->toArray());
+        }
+
+        usort($data, function (array $elem1, $elem2) {
+            return $elem1['id'] <=> $elem2['id'] ?:
+                $elem1['type'] <=> $elem2['type'];
+        });
+
+        return datatables()->of($data)
+            ->addColumn('actions', function ($data) {
+                return $this->buttonActionS(true, true, 'mterminal', $data['id']);
+            })->rawColumns(['actions'])
+            ->toJson();
+    }
+
     /**************************************************************************/
     public function getHistorialDomiciliationOperation($request)
     {

@@ -502,11 +502,12 @@
                         <div class="col-sm-12">
                             <h5 class="header-title"><b>Observaciones</b></h5>
                         </div>
+
                         <div class="col-sm-12">
-                            {!! form::textarea('observation_initial', null, [
+                            {!! form::textarea('observation_initial', $data[0]['observation_initial'], [
                                 'id' => 'observation_initial',
-                                'class' => 'form-control blank',
-                                'value' => old('observation'),
+                                'class' => 'form-control',
+                                'value' => old('observation_initial'),
                                 'rows' => 2,
                                 'readonly' => 'readonly',
                             ]) !!}

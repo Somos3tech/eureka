@@ -39,7 +39,7 @@ class CsupportController extends Controller
     /******************Guardar Registro Soporte Administrativo*****************/
     public function store(CsupportRequest $request)
     {
-        if (! $data = $this->model->create($request)) {
+        if (!$data = $this->model->create($request)) {
             return response()->json(['success' => 'true', 'message' => 'Error al registrar Soporte Administrativo']);
         }
 
@@ -61,7 +61,7 @@ class CsupportController extends Controller
     /**********************Actualizar Registro Soporte Administrativo***************************/
     public function update(CsupportUpdateRequest $request, $id)
     {
-        if (! $this->model->update($request, (int) $id)) {
+        if (!$this->model->update($request, (int) $id)) {
             return response()->json(['success' => 'true', 'message' => 'Error al Actualizar Registro Soporte Administrativo']);
         }
 

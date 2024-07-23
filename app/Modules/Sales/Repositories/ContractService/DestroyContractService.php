@@ -8,6 +8,6 @@ class DestroyContractService implements ContractServiceInterface
 {
     public function updateField($request)
     {
-        return  ['status' => 'Anulado', 'user_updated_id' => Auth::user()->id];
+        return  ['terminal_id' => null, 'simcard_id' => null, 'status' => 'Anulado', 'user_updated_id' => Auth::user()->id];
     }
 }

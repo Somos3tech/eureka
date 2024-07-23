@@ -8,6 +8,6 @@ class DeleteContractService implements ContractServiceInterface
 {
     public function updateField($request)
     {
-        return  ['status' => 'Eliminado', 'user_updated_id' => Auth::user()->id];
+        return  ['terminal_id' => null, 'simcard_id' => null, 'status' => 'Eliminado', 'user_updated_id' => Auth::user()->id];
     }
 }

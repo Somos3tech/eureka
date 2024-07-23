@@ -356,15 +356,19 @@
                             "<option value=''>Seleccione Cambio a Realizar...</option>");
                         $('#type_service').append("<option value='Created'>Fecha Generado</option>");
                         $('#type_service').append("<option value='PaymentDate'>Fecha Pago</option>");
-                        $('#type_service').append("<option value='Refer'>Referencia</option>");
-                        $('#type_service').append("<option value='Attachment'>Soporte de Pago</option>");
+
                         if (data.collection_id <= 0) {
                             $('#type_service').append("<option value='PaymentMethod'>Método Pago</option>");
                             $('#type_service').append("<option value='Amount'>Monto Venta</option>");
                         }
 
                         $('#type_service').append("<option value='Free'>Descuento</option>");
-                        $('#type_service').append("<option value='Dicom'>Tarifa Cambio Divisa</option>");
+
+                        if (data.status_invoice != 'C') {
+                            $('#type_service').append("<option value='Refer'>Referencia</option>");
+                            $('#type_service').append("<option value='Attachment'>Soporte de Pago</option>");
+                            $('#type_service').append("<option value='Dicom'>Tarifa Cambio Divisa</option>");
+                        }
 
                         $('#invoices-detail > tbody').empty();
                         var tbl = document.getElementById("invoices-detail");

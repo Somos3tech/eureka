@@ -460,12 +460,11 @@
                                     "<option value='ModelTerminal'>Modelo Terminal</option>");
                             }
 
-                            if (document.getElementById("simcard_id_support").value != '') {
-                                $('#type_service').append(
-                                    "<option value='SimcardChange'>Cambio Simcard</option>");
-                            } else {
+                            //if (document.getElementById("simcard_id_support").value != '') {
+                                $('#type_service').append("<option value='SimcardChange'>Cambio Simcard</option>");
+                            //} else {
                                 $('#type_service').append("<option value='Operator'>Operador</option>");
-                            }
+                            //}
                             $('#type_service').append("<option value='Nropos'>No. Terminal</option>");
                             $('#type_service').append("<option value='ObservationChange'>Observacion contrato</option>");
                             $('#type_service').append(
