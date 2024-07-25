@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.2|^8.0",
         "barryvdh/laravel-dompdf": "^2.0.0",
-        "beyondcode/laravel-websockets": "1.13.2",
+        "beyondcode/laravel-websockets": "1.14.1",
         "caffeinated/modules": "^6.2",
         "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.0",
