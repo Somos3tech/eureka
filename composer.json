@@ -12,7 +12,7 @@
         "barryvdh/laravel-dompdf": "^2.0.0",
         "beyondcode/laravel-websockets": "1.13.2",
         "caffeinated/modules": "^6.2",
-        "doctrine/dbal": "^3.0",
+        "doctrine/dbal": "^4.0",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^3.0",
         "igorescobar/jquery-mask-plugin": "^1.14",
