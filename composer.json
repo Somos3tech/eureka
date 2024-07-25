@@ -27,7 +27,7 @@
         "phpoffice/phpword": "^1.0.0",
         "protoqol/prequel": "^1.23",
         "pusher/pusher-php-server": "^7.2.2",
-        "spatie/laravel-permission": "^5.7",
+        "spatie/laravel-permission": "^6.9",
         "yajra/laravel-datatables-oracle": "^9.15",
         "yoeunes/toastr": "^1.2"
     },
